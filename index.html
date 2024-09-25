@@ -9,6 +9,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
         body{
             overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
         .song {
             visibility: hidden;
@@ -20,18 +22,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
         .container {
             width: 70%;
             height: 100vh;
             text-align: center;
             font-family: "Roboto", sans-serif;
+            overflow: hidden;
             /* background-color: rebeccapurple; */
         }
         #bag1 {
             width: 100%;
             height: inherit;
+            overflow: hidden;
+            height: 100vh;
         }
         #opening {
             width: 100vw;
@@ -48,10 +52,9 @@
 
         #bag2 {
             height: inherit;
-            padding: 2rem;
             margin-top: 4rem;
         }
-        .content-img{
+        .content{
             display: flex;
             justify-content: center;
         }
@@ -97,6 +100,14 @@
             .title{
                 font-size: large;
             }
+            .greetings {
+                min-height: 50px;
+                font-size: small;
+                border: none;
+            }
+            #bag2 {
+                width: 100%;
+            }
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -118,14 +129,16 @@
             </div>
 
             <div id="bag2" class="">
-                <div class="content-img">
+                <div class="flex-center">
                     <div class="img-warp">
                         <img src="./img/jeje.jpg" alt="" width=" 200px">
                         <span class="emote">🥳</span>
                     </div>
                 </div>
-                <div class="greetings">
-                    <p>Selamat ulang tahun yang ke-19 sayang 😼😽, semoga panjang umur sehat selalu dan keinginannya tercapai. Jeje jangan nangis terus kurangi begadang samo marahnyo banyaki makan sayurr 😡🍅🥕. Jeje senang terus have fun jalani hari jadilah diri sendiri jangan terlalu mikiri omongan orang lain 🦈. Jian cuman biso ngasih ini maaf yaa🙏</p>
+                <div class="flex-center">
+                    <div class="greetings">
+                        <p>Selamat ulang tahun yang ke-19 sayang 😼😽, semoga panjang umur sehat selalu dan keinginannya tercapai. Jeje jangan nangis terus kurangi begadang samo marahnyo banyaki makan sayurr 😡🍅🥕. Jeje senang terus have fun jalani hari jadilah diri sendiri jangan terlalu mikiri omongan orang lain 🦈. Jian cuman biso ngasih ini maaf yaa🙏</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,7 +169,7 @@
         let txt = `<span>${cont1.innerHTML.split("").join("</span><span>")}</span>`
         cont1.innerHTML = txt
         let tl = gsap.timeline()
-        tl.from("#opening", {duration: 1.2, opacity : 1}, 3).to("#opening", {opacity : 0}).from("#bag1 .title", {duration: 0.2, scale : 5, opacity: 0}).to("#bag1 .title", {scale : 1, opacity : 1}).to("#bag1 .title", {duration: 4,opacity: 0 }).to("#bag1", {position : "absolute"}).from("#bag2 .img-warp .emote", {duration: 0.2, scale : 5, opacity: 0}).from("#bag2 .img-warp img", {duration: 0.2, scale : 5, opacity: 0}).to("#bag2 .img-warp img", {scale : 1, opacity : 1}, "image").to("#bag2 .img-warp .emote", {scale : 1, opacity : 1}).from("#bag2 .greetings", {opacity: 0, marginLeft: -100}).to("#bag2 .greetings", {opacity: 1, marginLeft: 0}).from(".greetings p span", {opacity: 0, stagger:0.1} ).to(".greetings p span" , {duration: 0.5,opacity : 1,stagger: 0.1})
+        tl.from("#opening", {duration: 1.2, opacity : 1}, 3).to("#opening", {opacity : 0}).from("#bag1 .title", {duration: 0.2, scale : 5, opacity: 0}).to("#bag1 .title", {scale : 1, opacity : 1}).to("#bag1 .title", {duration: 4,opacity: 0 }).to("#bag1", {display : 'none'}).from("#bag2 .img-warp .emote", {duration: 0.2, scale : 5, opacity: 0}).from("#bag2 .img-warp img", {duration: 0.2, scale : 5, opacity: 0}).to("#bag2 .img-warp img", {scale : 1, opacity : 1}, "image").to("#bag2 .img-warp .emote", {scale : 1, opacity : 1}).from("#bag2 .greetings", {opacity: 0, marginLeft: -100}).to("#bag2 .greetings", {opacity: 1, marginLeft: 0}).from(".greetings p span", {opacity: 0, stagger:0.1} ).to(".greetings p span" , {duration: 0.5,opacity : 1,stagger: 0.1})
     }
 </script>
 
