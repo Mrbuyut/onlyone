@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./img/gift.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeanne Septiani L. Toruan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+        body{
+            overflow: hidden;
+        }
+        .song {
+            visibility: hidden;
+        }
+        canvas {
+            position: absolute;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 70%;
+            height: 100vh;
+            text-align: center;
+            font-family: "Roboto", sans-serif;
+            /* background-color: rebeccapurple; */
+        }
+        #bag1 {
+            width: 100%;
+            height: inherit;
+        }
+        #opening {
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+        .title {
+            font-size: xx-large;
+        }
+
+        #bag2 {
+            height: inherit;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        .content-img{
+            display: flex;
+            justify-content: center;
+        }
+        .img-warp{
+            width: 200px;
+            position: relative;
+        }
+        .img-warp img {
+            border-radius: 4%;
+            box-shadow: 0px 0px 5px darkslategray;
+        }
+        .img-warp span.emote{
+            position: absolute;
+            top: -1rem;
+            left: -1rem;
+            transform: rotateZ(-25deg);
+            font-size: 48px;
+            animation-name: scaleOn;
+            animation-duration: 2s;
+            animation-timing-function: ease-in;
+        }
+        .greetings {
+            border: 1px solid black;
+            border-radius: 1rem;
+            min-height: 200px;
+            text-align: left;
+            padding-left: 1rem;
+            font-family: "Poppins", sans-serif;
+        }
+
+        @keyframes scaleOn {
+            0%{
+                transform: scale(5);
+                opacity: 0;
+            }
+            100%{
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @media only screen and (max-width: 479px) { 
+            .title{
+                font-size: large;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <audio class="song" loop autoplay>
+        <source src="./music/hbd.mpeg">
+        </source>
+        Your browser isn't invited for super fun audio time.
+    </audio>
+    <canvas id="canvas"></canvas>
+    <div class="flex-center">
+        <div class="container">
+            <div id="bag1" class="flex-center">
+                <div id="opening">
+                </div>
+                <h1 class="title">Selamat Ulang tahun Sayang 🎉🎊</h1>
+            </div>
+
+            <div id="bag2" class="">
+                <div class="content-img">
+                    <div class="img-warp">
+                        <img src="./img/jeje.jpg" alt="" width=" 200px">
+                        <span class="emote">🥳</span>
+                    </div>
+                </div>
+                <div class="greetings">
+                    <p>Selamat ulang tahun yang ke-19 sayang 😼😽, semoga panjang umur sehat selalu dan keinginannya tercapai. Jeje jangan nangis terus kurangi begadang samo marahnyo banyaki makan sayurr 😡🍅🥕. Jeje senang terus have fun jalani hari jadilah diri sendiri jangan terlalu mikiri omongan orang lain 🦈. Jian cuman biso ngasih ini maaf yaa🙏</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    window.addEventListener('load', () => {
+    Swal.fire({
+        title: 'Mau denger lagunyo?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yup',
+        cancelButtonText: 'tidaaak',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.querySelector('.song').play();
+            animationTimeline();
+        } else {
+            animationTimeline();
+        }
+    });
+});
+
+    function animationTimeline() {
+        let cont1 = document.querySelector(".greetings p")
+        let txt = `<span>${cont1.innerHTML.split("").join("</span><span>")}</span>`
+        cont1.innerHTML = txt
+        let tl = gsap.timeline()
+        tl.from("#opening", {duration: 1.2, opacity : 1}, 3).to("#opening", {opacity : 0}).from("#bag1 .title", {duration: 0.2, scale : 5, opacity: 0}).to("#bag1 .title", {scale : 1, opacity : 1}).to("#bag1 .title", {duration: 4,opacity: 0 }).to("#bag1", {position : "absolute"}).from("#bag2 .img-warp .emote", {duration: 0.2, scale : 5, opacity: 0}).from("#bag2 .img-warp img", {duration: 0.2, scale : 5, opacity: 0}).to("#bag2 .img-warp img", {scale : 1, opacity : 1}, "image").to("#bag2 .img-warp .emote", {scale : 1, opacity : 1}).from("#bag2 .greetings", {opacity: 0, marginLeft: -100}).to("#bag2 .greetings", {opacity: 1, marginLeft: 0}).from(".greetings p span", {opacity: 0, stagger:0.1} ).to(".greetings p span" , {duration: 0.5,opacity : 1,stagger: 0.1})
+    }
+</script>
+
+<script>
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
+    const maxConfettis = 150;
+    const particles = [];
+
+    const possibleColors = [
+    "DodgerBlue",
+    "OliveDrab",
+    "Gold",
+    "Pink",
+    "SlateBlue",
+    "LightBlue",
+    "Gold",
+    "Violet",
+    "PaleGreen",
+    "SteelBlue",
+    "SandyBrown",
+    "Chocolate",
+    "Crimson"
+    ];
+
+    function randomFromTo(from, to) {
+    return Math.floor(Math.random() * (to - from + 1) + from);
+    }
+
+    function confettiParticle() {
+    this.x = Math.random() * W; // x
+    this.y = Math.random() * H - H; // y
+    this.r = randomFromTo(11, 33); // radius
+    this.d = Math.random() * maxConfettis + 11;
+    this.color =
+        possibleColors[Math.floor(Math.random() * possibleColors.length)];
+    this.tilt = Math.floor(Math.random() * 33) - 11;
+    this.tiltAngleIncremental = Math.random() * 0.07 + 0.05;
+    this.tiltAngle = 0;
+
+    this.draw = function() {
+        context.beginPath();
+        context.lineWidth = this.r / 2;
+        context.strokeStyle = this.color;
+        context.moveTo(this.x + this.tilt + this.r / 3, this.y);
+        context.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
+        return context.stroke();
+    };
+    }
+
+    function Draw() {
+    const results = [];
+
+    // Magical recursive functional love
+    requestAnimationFrame(Draw);
+
+    context.clearRect(0, 0, W, window.innerHeight);
+
+    for (var i = 0; i < maxConfettis; i++) {
+        results.push(particles[i].draw());
+    }
+
+    let particle = {};
+    let remainingFlakes = 0;
+    for (var i = 0; i < maxConfettis; i++) {
+        particle = particles[i];
+
+        particle.tiltAngle += particle.tiltAngleIncremental;
+        particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+        particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
+
+        if (particle.y <= H) remainingFlakes++;
+    }
+
+    return results;
+    }
+
+    window.addEventListener(
+    "resize",
+    function() {
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    },
+    false
+    );
+
+    // Push new confetti objects to `particles[]`
+    for (var i = 0; i < maxConfettis; i++) {
+    particles.push(new confettiParticle());
+    }
+
+    // Initialize
+    canvas.width = W;
+    canvas.height = H;
+    setTimeout(()=> {
+        Draw();
+        }, 5000)
+</script>
+</body>
+</html>
